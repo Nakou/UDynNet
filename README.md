@@ -52,16 +52,14 @@ The system's composed by distincts elements which work together :
 * UDynNet-Node : This server will check if enough player are available to legitimate launching a server.
 * UDynNet-Unity : This is the Unity3D Client handle by the server, which will be a headless client with only the launch "as a server" will be available.
 
-* [Installation](#installation)
-* [Usage](#usage)
-* [Commands](#commands)
-* [Contributing](#contributing)
-* [Author](#author)
-
 ## Installation
+[Not yet]
 ## Usage
+[Not yet]
 ## Commands
+[Not yet]
 ## Contributing
+[Not yet]
 
 ## Author
 
