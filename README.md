@@ -27,7 +27,7 @@ The Projet :
 The goal is to make a plateform fully-automated which can handle a pseudo-dedicated server for Unity3D multiplayer games.
 
 ### Why
-Today you cannot create a dedicated server with the UNet standard unity networking system. You depends on direct connection between users or using the Unity3D(c) Matchmaking system sell by Unity3D, or you have to use the old legacy networking lib in Unity (which date from Unity3 and it's not what we can call a "cutting edge" technilogy).
+Today you cannot create a dedicated server with the UNet standard unity networking system. You depends on direct connection between users or using the Unity3D(c) Matchmaking system sold by Unity3D, or you have to use the old legacy networking lib in Unity (which date from Unity3 and it's not what we can call a "cutting edge" technology).
 
 ### What we use
 The goal is to dynamicly use the current networking player-to-hostplayer system. It's a cool system to use because it's easy to understand, standard based on the Unity3D system, efficient and easily debbuggable.
