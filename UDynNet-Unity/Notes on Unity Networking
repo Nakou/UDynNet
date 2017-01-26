@@ -1,0 +1,48 @@
+=================================
+
+	Networking Quick Notes
+
+=================================
+
+ ===> To act only on the current user :
+
+UserClass : NetworkBehaviour
+...
+	void Update () {
+		if(!isLocalPlayer){
+			return;
+		}
+	}
+...
+
+=================================
+
+ ===> At Start on Instanciation (local)
+
+ 	public override void OnStartLocalPlayer()
+	{
+		// GetComponent<MeshRenderer>().material.color = Color.blue;
+	}
+
+=================================
+
+ ===> Remote Actions
+
+https://docs.unity3d.com/Manual/UNetActions.html?_ga=1.226216602.1401286896.1476469728
+
+ => In Short, 
+...
+[Command]
+void CmdDoStuff
+...
+Execute the method CmdDoStuff on Server (on the player object, normally)
+ => and 
+...
+[ClientRpc]
+void RpcDoStuff
+...
+ClientRpc calls are sent from objects on the server to objects on clients
+
+== > To see
+
+https://forum.unity3d.com/threads/how-to-do-commands-rpcs-remoteactions-on-non-player-objects.338470/
