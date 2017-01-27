@@ -8,13 +8,14 @@ public class PlayerController : NetworkBehaviour {
 	[SerializeField]
 	private float moveSpeed;
 
+	private bool isConnected = false;
+
 	// Use this for initialization
 	void Start () {
 	}
 
 	void Awake(){
 		name = ""+Random.Range(1,1000000);
-		CmdTellNewConnection(name);
 	}
 
 	[Command]
@@ -26,6 +27,10 @@ public class PlayerController : NetworkBehaviour {
 	void Update () {
 		if(!isLocalPlayer)
 			return;
+		if(!isConnected){
+			isConnected = true;
+			CmdTellNewConnection(name);
+		}
 		Moves();
 	}
 
