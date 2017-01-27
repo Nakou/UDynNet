@@ -91,3 +91,6 @@ THE SOFTWARE.
 ```
 
 ## Thanks
+
+Thanks to @Feilyn for her kind support.
+Thanks Garry from the game Rust to provide his blog with a shitload of good advices and also, let people use some code and ideas.

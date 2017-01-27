@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using System.Collections;
 using System.Runtime.InteropServices;
 using System.IO;
 using System.Security;
@@ -10,7 +9,7 @@ using Windows;
 
 public class TankConsole : MonoBehaviour
 {
-	#if (UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN) && SERVER
+	#if (UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN) && SERVER && !CLIENT
 
 	Windows.ConsoleWindow console = new Windows.ConsoleWindow();
 	Windows.ConsoleInput input = new Windows.ConsoleInput();
