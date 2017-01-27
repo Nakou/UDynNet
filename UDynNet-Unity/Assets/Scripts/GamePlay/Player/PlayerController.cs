@@ -14,6 +14,12 @@ public class PlayerController : NetworkBehaviour {
 
 	void Awake(){
 		name = ""+Random.Range(1,1000000);
+		CmdTellNewConnection(name);
+	}
+
+	[Command]
+	void CmdTellNewConnection(string name){
+		Debug.Log("New Player connection : [" + name + "]");
 	}
 	
 	// Update is called once per frame

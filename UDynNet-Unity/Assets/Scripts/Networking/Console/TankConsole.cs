@@ -7,6 +7,9 @@ using System.IO;
 using System.Security;
 using Windows;
 
+#pragma warning disable CS0618 // disable
+#pragma warning disable CS0618 // disable
+
 public class TankConsole : MonoBehaviour
 {
 	#if (UNITY_EDITOR_WIN || UNITY_STANDALONE_WIN) && SERVER && !CLIENT
@@ -28,7 +31,7 @@ public class TankConsole : MonoBehaviour
 
 		input.OnInputText += OnInputText;
 
-		Application.RegisterLogCallback( HandleLog );
+		Application.logMessageReceived += HandleLog;
 
 		Debug.Log( "Console Started" );
 	}
@@ -39,7 +42,8 @@ public class TankConsole : MonoBehaviour
 	//
 	void OnInputText( string obj )
 	{
-		Debug.Log("Lol");
+		Debug.Log("Server using command : " + obj);
+		Execute(obj);
 	}
 
 	//
@@ -87,6 +91,15 @@ public class TankConsole : MonoBehaviour
 	void OnDestroy()
 	{
 		console.Shutdown();
+	}
+
+	void Execute(String command){
+		if("exit".Equals(command)){
+			Debug.Log("Closing server...");
+			Application.Quit();
+			return;
+		}
+		Debug.Log("Command unknown...");
 	}
 
 	#endif

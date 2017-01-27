@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Networking;
 
-public class SimpleNetworkHandler : MonoBehaviour {
+public class SimpleNetworkHandler : NetworkBehaviour {
 
 	private NakNetworkManager manager;
 	// Use this for initialization
@@ -13,7 +13,9 @@ public class SimpleNetworkHandler : MonoBehaviour {
 		StartServer();
 		#endif
 
-		#if CLIENT && !SERVER
+		#if CLIENT
+		manager.autoCreatePlayer = true;
+		Debug.Log("Connection to server...");
 		StartClient();
 		#endif
 	}
@@ -28,7 +30,7 @@ public class SimpleNetworkHandler : MonoBehaviour {
 	}
 
 	void StartClient(){
-		//manager.networkAddress = "localhost";
+		//manager.networkAddress = "localhost";  
 		manager.StartClient();
 	}
 }
