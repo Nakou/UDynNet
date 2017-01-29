@@ -16,7 +16,7 @@ public class TankConsole : MonoBehaviour
 
 	Windows.ConsoleWindow console = new Windows.ConsoleWindow();
 	Windows.ConsoleInput input = new Windows.ConsoleInput();
-
+	NakNetworkManager networkManager;
 	string strInput;
 
 	//
@@ -27,10 +27,10 @@ public class TankConsole : MonoBehaviour
 		DontDestroyOnLoad( gameObject );
 
 		console.Initialize();
-		console.SetTitle( "TankU Server" );
+		console.SetTitle( "UDynNet POC Server" );
 
 		input.OnInputText += OnInputText;
-
+		networkManager = gameObject.GetComponent<NakNetworkManager>();
 		Application.logMessageReceived += HandleLog;
 
 		Debug.Log( "Console Started" );
@@ -42,6 +42,8 @@ public class TankConsole : MonoBehaviour
 	//
 	void OnInputText( string obj )
 	{
+		if(obj == null)
+			obj = "";
 		Debug.Log("Server using command : " + obj);
 		Execute(obj);
 	}
@@ -59,8 +61,14 @@ public class TankConsole : MonoBehaviour
 				message = "[ERROR] " + message;
 				System.Console.ForegroundColor = ConsoleColor.Red;
 			} else	{
-				message = "[INFO] " + message;
-				System.Console.ForegroundColor = ConsoleColor.White;
+				if( message.Contains("[RTLines]")){
+					string[] mess = message.Split("]".ToCharArray(),2);
+					message = mess[1];
+					System.Console.ForegroundColor = ConsoleColor.DarkCyan;
+				} else {
+					message = "[INFO] " + message;
+					System.Console.ForegroundColor = ConsoleColor.White;
+				}
 			}
 
 			// We're half way through typing something, so clear this line ..
@@ -94,12 +102,33 @@ public class TankConsole : MonoBehaviour
 	}
 
 	void Execute(String command){
-		if("exit".Equals(command)){
-			Debug.Log("Closing server...");
+		if(command.Contains("close")){
+			ConsoleReturnLines("Closing server...");
 			Application.Quit();
 			return;
 		}
-		Debug.Log("Command unknown...");
+
+		if(command.Contains("help")){
+			ConsoleReturnLines("close :");
+			ConsoleReturnLines("Close the server.");
+			ConsoleReturnLines("help :");
+			ConsoleReturnLines("Show this screen.");
+			ConsoleReturnLines("spawn [prefabName] [x,y,z]");
+			ConsoleReturnLines("Spawn the gameobject on the coord.");
+			return;
+		}
+
+		if(command.Contains("spawn")){
+			ConsoleReturnLines("Not implemented yet (: ...");
+			return;
+		}
+
+
+		ConsoleReturnLines("Command unknown. Type \"help\" to get the list of commands");
+	}
+
+	void ConsoleReturnLines(string line){
+		Debug.Log("[RTLines]" + line);
 	}
 
 	#endif

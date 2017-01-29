@@ -7,22 +7,19 @@ public class PlayerController : NetworkBehaviour {
 
 	[SerializeField]
 	private float moveSpeed;
+	[SerializeField]
+	private PlayerUI ui;
 
 	private bool isConnected = false;
-
-	// Use this for initialization
-	void Start () {
-	}
+	[SerializeField]
+	private GameObject serverInfos;
 
 	void Awake(){
 		name = ""+Random.Range(1,1000000);
+		ui = gameObject.GetComponent<PlayerUI>();
+		serverInfos = GameObject.Find("ServerInfos");
 	}
 
-	[Command]
-	void CmdTellNewConnection(string name){
-		Debug.Log("New Player connection : [" + name + "]");
-	}
-	
 	// Update is called once per frame
 	void Update () {
 		if(!isLocalPlayer)
@@ -30,19 +27,21 @@ public class PlayerController : NetworkBehaviour {
 		if(!isConnected){
 			isConnected = true;
 			CmdTellNewConnection(name);
+			ui.NameUI.text = "Name : " + name;
+			ui.HealthUI.text = "Health : 10HP";
+			CmdAddPlayerToList();
 		}
 		Moves();
+		if(Input.GetKeyDown(KeyCode.Tab)){
+			CmdShowPlayerList();
+		}
 	}
 
 	void FixedUpdate(){
 		
 	}
-		
-	void Moves(){
-		if(isServer){
-			Debug.Log("[NoConsole]"+name);
-		}
 
+	void Moves(){
 		float v = Input.GetAxis("Vertical");
 		gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,0, v * moveSpeed));
 
@@ -55,8 +54,22 @@ public class PlayerController : NetworkBehaviour {
 		}
 	}
 
-	public override void OnStartLocalPlayer()
-	{
+	public override void OnStartLocalPlayer() {
 		GetComponent<MeshRenderer>().material.color = Color.blue;
+	}
+
+	[Command]
+	void CmdTellNewConnection(string name){
+		Debug.Log("New Player connection : [" + name + "]");
+	}
+
+	[Command]
+	void CmdShowPlayerList(){
+		Debug.Log(serverInfos.GetComponent<ServerInfos>().getPlayerList());
+	}
+
+	[Command]
+	void CmdAddPlayerToList(){
+		serverInfos.GetComponent<ServerInfos>().NewPlayer(name);
 	}
 }
