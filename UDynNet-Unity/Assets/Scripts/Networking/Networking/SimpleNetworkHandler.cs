@@ -19,6 +19,9 @@ public class SimpleNetworkHandler : MonoBehaviour {
 		manager = gameObject.GetComponent<NakNetworkManager>();
 		#if SERVER && !CLIENT
 		StartServer();
+		GameObject gObj = Instantiate(serverPrefab);
+		gObj.name = serverPrefab.name;
+		NetworkServer.Spawn(gObj);
 		#endif
 
 		#if CLIENT && !SERVER
@@ -29,11 +32,10 @@ public class SimpleNetworkHandler : MonoBehaviour {
 		#if CLIENT && SERVER
 		Debug.Log("Connection to server...");
 		StartLocalClient();
-		#endif
 		GameObject gObj = Instantiate(serverPrefab);
 		gObj.name = serverPrefab.name;
 		NetworkServer.Spawn(gObj);
-		Debug.Break();
+		#endif
 	}
 	
 	// Update is called once per frame

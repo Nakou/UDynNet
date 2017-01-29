@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class PlayerController : NetworkBehaviour {
 
-	[SerializeField]
-	private float moveSpeed;
-	[SerializeField]
-	private PlayerUI ui;
+	[SerializeField] private float moveSpeed;
+	[SerializeField] private PlayerUI ui;
+	[SerializeField] private GameObject serverInfos;
+	[SerializeField] Camera cam;
 
 	private bool isConnected = false;
-	[SerializeField]
-	private GameObject serverInfos;
 
 	void Awake(){
 		name = ""+Random.Range(1,1000000);
@@ -22,14 +20,15 @@ public class PlayerController : NetworkBehaviour {
 
 	// Update is called once per frame
 	void Update () {
-		if(!isLocalPlayer)
+		if(!isLocalPlayer){
+			cam.enabled = false;
 			return;
+		}
 		if(!isConnected){
 			isConnected = true;
 			CmdTellNewConnection(name);
 			ui.NameUI.text = "Name : " + name;
 			ui.HealthUI.text = "Health : 10HP";
-			CmdAddPlayerToList();
 		}
 		Moves();
 		if(Input.GetKeyDown(KeyCode.Tab)){
@@ -61,15 +60,11 @@ public class PlayerController : NetworkBehaviour {
 	[Command]
 	void CmdTellNewConnection(string name){
 		Debug.Log("New Player connection : [" + name + "]");
+		serverInfos.GetComponent<ServerInfos>().NewPlayer(name);
 	}
 
 	[Command]
 	void CmdShowPlayerList(){
 		Debug.Log(serverInfos.GetComponent<ServerInfos>().getPlayerList());
-	}
-
-	[Command]
-	void CmdAddPlayerToList(){
-		serverInfos.GetComponent<ServerInfos>().NewPlayer(name);
 	}
 }

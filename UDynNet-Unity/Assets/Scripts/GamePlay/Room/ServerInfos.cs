@@ -6,13 +6,17 @@ using UnityEngine.Networking;
 public class ServerInfos : NetworkBehaviour {
 	
 	[SerializeField]
+	[SyncVar]
 	private int playerCount = 0;
+
 	[SerializeField]
-	private List<string> playerList;
+	[SyncVar]
+	private SyncListString playerList;
 
 	void Awake(){
-		playerList = new List<string>();
+		playerList = new SyncListString();
 		Debug.Log("Awake!");
+		name = "ServerInfos";
 	}
 
 	void Update(){
@@ -21,9 +25,10 @@ public class ServerInfos : NetworkBehaviour {
 
 	public void NewPlayer(string name){
 		if(playerList == null){
-			playerList = new List<string>();
+			playerList = new SyncListString();
 		}
 		playerList.Add(name);
+		playerCount = playerList.Count;
 	}
 
 	public string getPlayerList(){
