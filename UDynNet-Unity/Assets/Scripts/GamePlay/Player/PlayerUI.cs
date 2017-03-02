@@ -26,4 +26,11 @@ public class PlayerUI : MonoBehaviour {
 	public Text HealthUI {get{return healthUI;} set{healthUI = value;}}
 	public Text PlayerListUI {get{return playerListUI;} set{playerListUI = value;}}
 	public Text ChatBoxUI {get{return chatBoxUI;} set{chatBoxUI = value;}}
+
+	public void fillPlayers(List<string> players){
+		playerListUI.text = "";
+		foreach(string player in players){
+			playerListUI.text += player + "\n";	
+		}
+	}
 }

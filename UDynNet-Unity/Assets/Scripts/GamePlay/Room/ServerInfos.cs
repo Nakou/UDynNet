@@ -31,7 +31,7 @@ public class ServerInfos : NetworkBehaviour {
 		playerCount = playerList.Count;
 	}
 
-	public string getPlayerList(){
-		return playerList.ToString();
+	public SyncListString getPlayerList(){
+		return playerList;
 	}
 }

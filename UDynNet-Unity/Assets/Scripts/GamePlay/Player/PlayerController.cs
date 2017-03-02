@@ -32,7 +32,7 @@ public class PlayerController : NetworkBehaviour {
 		}
 		Moves();
 		if(Input.GetKeyDown(KeyCode.Tab)){
-			CmdShowPlayerList();
+			ShowPlayerList();
 		}
 	}
 
@@ -42,7 +42,8 @@ public class PlayerController : NetworkBehaviour {
 
 	void Moves(){
 		float v = Input.GetAxis("Vertical");
-		gameObject.GetComponent<Rigidbody>().AddForce(new Vector3(0,0, v * moveSpeed));
+		//gameObject.transform.position += Vector3.forward * (v * Time.deltaTime * moveSpeed);
+		gameObject.GetComponent<Rigidbody>().AddForce( cam.transform.forward * v * moveSpeed);
 
 		float rotation = Input.GetAxis("Horizontal") * moveSpeed;
 		rotation *= Time.deltaTime;
@@ -63,8 +64,12 @@ public class PlayerController : NetworkBehaviour {
 		serverInfos.GetComponent<ServerInfos>().NewPlayer(name);
 	}
 
-	[Command]
-	void CmdShowPlayerList(){
-		Debug.Log(serverInfos.GetComponent<ServerInfos>().getPlayerList());
+	//[Command]
+	void ShowPlayerList(){
+		List<string> players = new List<string>();
+		foreach(string player in serverInfos.GetComponent<ServerInfos>().getPlayerList()){
+			players.Add(player);
+		}
+		ui.fillPlayers(players);
 	}
 }
