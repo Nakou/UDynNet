@@ -18,5 +18,6 @@ class Character extends Model{
 		$characterList = app('db')->table('character')
 		->where('user_id', $id)
 		->get();
+		return $characterList;
 	}
 }
