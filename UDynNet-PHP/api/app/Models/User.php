@@ -13,7 +13,7 @@ class User extends Model{
 		'username',
 		'password',
 		'last_connection_attempt',
-		'remaining_attempts'
+		'remaining_attempts',
 		'token'];
 
 	protected $hidden = ['password', 'token'];

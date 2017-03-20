@@ -13,4 +13,10 @@ class Character extends Model{
 		'character_name',
 		'level'
 		];
+
+	public static function getCharactersByUserId($id){
+		$characterList = app('db')->table('character')
+		->where('user_id', $id)
+		->get();
+	}
 }

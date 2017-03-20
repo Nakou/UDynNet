@@ -5,11 +5,7 @@ $app->get('/getUser/{id}', function ($id) {
 });
 
 $app->get('/getCharacterFromUser/{idUser}', function ($idUser) {
-	$user = App\Models\User::find($idUser);
-
-	$characterList = DB::table('character')
-		->where('user_id', $idUser)
-		->get(); // => put that into the User Model class
+	$characterList = App\Models\Character::getCharactersByUserId($idUser);
 
     return $characterList;
 });
