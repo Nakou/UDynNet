@@ -1,6 +1,6 @@
 <?php 
 
-$app->put('user/{id}', 'UserController@update');
+$app->put('user/{id}', 'UserController@showUser');
 
 $app->get('/user/create/{login}/{password}', function ($login, $password) {
     return App\Models\User::create($login, $password);
