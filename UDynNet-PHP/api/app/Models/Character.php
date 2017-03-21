@@ -11,7 +11,9 @@ class Character extends Model{
 	protected $fillable = [
 		'user_id',
 		'character_name',
-		'level'
+		'level',
+		'vectorPosition',
+		'vectorRotation'
 		];
 
 	public static function getCharactersByUserId($id){
@@ -20,4 +22,6 @@ class Character extends Model{
 		->get();
 		return $characterList;
 	}
+
+	
 }

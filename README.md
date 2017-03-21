@@ -52,6 +52,18 @@ The system's composed by distincts elements which work together :
 * UDynNet-Node : This server will check if enough player are available to legitimate launching a server.
 * UDynNet-Unity : This is the Unity3D Client handle by the server, which will be a headless client with only the launch "as a server" will be available.
 
+
+### What you may use
+**IMPORTANT NOTE:** This is not an usable project, a lot of stuff is just some experiments.
+But with this repo, I want you to be able to find some answers of "how to make a headless server", "how to implement basic networking stuff in Unity". So, dont use that project as a framework, but more as an example.
+
+## Roadmap
+For now, I'm working by phases which looks like sprints but I'm not limit myself with end dates and stuff.
+- [X] Phase 1 : Creating a headless version of the server and implement a switch in Unity Editor to work on both client and server.
+- [ ] Phase 2 : Make the game loading information from a PHP (Lumen/Laravel) API (with a connected/token mode).
+- [ ] Phase 3 : Implement classicals features in the server part (damages, player list, tchat, inventory).
+- [ ] Phase 4 : Implement the nodeJS system for Matchmaking which will launch stand-alones servers at needs.
+
 ## Installation
 [Not yet]
 ## Usage
@@ -59,7 +71,7 @@ The system's composed by distincts elements which work together :
 ## Commands
 [Not yet]
 ## Contributing
-[Not yet]
+For now, I'm not interested in contribution of any kind, because i'm still currently building this stuff up along the way. But when it will be finished, who knows :p.
 
 ## Author
 
