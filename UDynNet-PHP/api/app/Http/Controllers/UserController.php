@@ -29,12 +29,8 @@ class UserController extends Controller
 
   public function update(Request $request){
     $token = $request->input('token');
-    $user = \App\Models\User::where('token', $token)
-      ->first();
-    if($user != null){
-      return "{'true'}";   
-    }
-    return "{'false'}";   
+    $user = \App\Models\User::where('token', $token)->first();
+    return $user;
   }
 
 }
