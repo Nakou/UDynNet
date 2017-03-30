@@ -1,0 +1,43 @@
+=======================================
+# Laravel - Lumen - Artisan - Eloquent 
+#
+# for dummies:
+=======================================
+
+	How to add a table in the Migration
+
+=======================================
+
+1. Create a Model in App/Model
+2. Fill the informations like the others.
+3. Declare the migration with the command :
+	
+	 php artisan make:migration add_some_shit_in_db
+
+4. Go to database/migrations/the_date_add_some_shit_in_db.php
+5. Add some shit in the up() method, like :
+
+	Schema::create(
+
+	(to create, or...)
+	
+	Schema::table('table_name', function (Blueprint $table) {
+	    $table->string('column');
+	});
+
+6. Do the migration with the command :
+	
+	php artisan migrate
+
+=======================================
+
+	How to fill a databases with datas
+
+=======================================
+
+1. Go to database/seeds and add a file like myTableSeeder.php
+2. Fill it like the others one.
+3. Add it in the run() method.
+4. Go with the command :
+	
+	php artisan db:seed
