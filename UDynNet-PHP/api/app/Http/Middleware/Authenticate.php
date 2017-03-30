@@ -35,7 +35,7 @@ class Authenticate
      */
     public function handle($request, Closure $next, $guard = null)
     {
-        $token = $request->input('token');
+        $token = $request->header('Magik-Token');
         $user = \App\Models\User::where('token', $token)->first();
         if($user != null){
             return $next($request);
