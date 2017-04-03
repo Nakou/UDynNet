@@ -1,0 +1,38 @@
+{
+  "name": "waitingline",
+  "base": "PersistedModel",
+  "idInjection": true,
+  "options": {
+    "validateUpsert": true
+  },
+  "properties": {
+    "id": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "user_id": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "wait_token": {
+      "type": "string",
+      "required": true,
+      "default": "NULL"
+    },
+    "level": {
+      "type": "number",
+      "required": true,
+      "default": 0
+    },
+    "entry_on": {
+      "type": "date",
+      "required": true
+    }
+  },
+  "validations": [],
+  "relations": {},
+  "acls": [],
+  "methods": {}
+}
